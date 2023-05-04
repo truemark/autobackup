@@ -1,14 +1,20 @@
-# Welcome to your CDK TypeScript project
+# Auto Backup
 
-This is a blank project for CDK development with TypeScript.
+This AWS CDK project deploys functionality to automatically backup resources based on tags.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## Supported Tags
 
-## Useful commands
+| Tag                                 | Description                        |
+|-------------------------------------|------------------------------------|
+| backup:policy                       | Name of the backup policy to use.  |
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+## Backup Policies
+
+| Policy          | Description                                                  |
+|-----------------|--------------------------------------------------------------|
+| default-7-years | 35 days of daily, 90 days of weekly and 2555 days of monthly |
+| default-year    | 35 days of daily, 90 days of weekly, 365 days of monthly     |
+| default-quarter | 35 days of daily, 90 days of weekly                          |
+| default-month   | 35 days of daily                                             |
+| default-week    | 7 days of of daily                                           |
+
