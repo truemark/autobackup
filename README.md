@@ -18,3 +18,16 @@ This AWS CDK project deploys functionality to automatically backup resources bas
 | default-month   | 35 days of daily                                             |
 | default-week    | 7 days of of daily                                           |
 
+## How to deploy
+
+If not already done, bootstrap the account for CDK
+```bash
+cdk bootstrap \
+"aws://$(aws sts get-caller-identity --query 'Account' --output text)/${AWS_DEFAULT_REGION}" \
+--cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess
+```
+
+Deploy the stack
+```bash
+cdk deploy
+```
