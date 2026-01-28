@@ -24,13 +24,6 @@ export interface AutoBackupProps {
 }
 
 export class AutoBackup extends Construct {
-  private hourly(hours: number): BackupPlanRule {
-    return new BackupPlanRule({
-      ruleName: "Hourly",
-      scheduleExpression: Schedule.cron({ minute: "0", hour: "*" }),
-      deleteAfter: Duration.hours(hours),
-    });
-  }
 
   private daily(days: number): BackupPlanRule {
     return new BackupPlanRule({
