@@ -104,16 +104,16 @@ export class AutoBackup extends Construct {
     });
     this.tagSelection(defaultQuarter, "default-quarter");
 
-    const defaultYear = new BackupPlan(this, "DefaultYear", {
+    const defaultDaily35Weekly90Monthly365 = new BackupPlan(this, "DefaultYear", {
       backupVault,
       backupPlanRules: [this.daily(35), this.weekly(90), this.monthly(365)],
     });
-    this.tagSelection(defaultYear, "default-year");
+    this.tagSelection(defaultDaily35Weekly90Monthly365, "default-year");
 
-    const default7Years = new BackupPlan(this, "Default7Years", {
+    const defaultDaily35Weekly90Monthly2555 = new BackupPlan(this, "Default7Years", {
       backupVault,
       backupPlanRules: [this.daily(35), this.weekly(90), this.monthly(2555)],
     });
-    this.tagSelection(default7Years, "default-7-years");
+    this.tagSelection(defaultDaily35Weekly90Monthly2555, "default-7-years");
   }
 }
