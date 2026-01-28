@@ -24,28 +24,8 @@ This project supports **fully immutable backups** using **AWS Backup Vault Lock*
 
 When immutable backups are enabled:
 
-- A separate immutable backup vault is created
-- AWS Backup Vault Lock is configured on that vault
-- Backups written to the immutable vault cannot be deleted or modified until their retention expires
-- Users opt in by using `*-immutable` policy tag values
-
-In this project, **immutable always means Vault Lock is enabled**. Without Vault Lock, backups are not considered immutable.
-
-## Immutable Policy Tags
-
-Each standard policy has an immutable equivalent:
-
-| Immutable Policy          | Description                                                  |
-| ------------------------- | ------------------------------------------------------------ |
-| default-7-years-immutable | 35 days of daily, 90 days of weekly and 2555 days of monthly |
-| default-year-immutable    | 35 days of daily, 90 days of weekly, 365 days of monthly     |
-| default-quarter-immutable | 35 days of daily, 90 days of weekly                          |
-| default-month-immutable   | 35 days of daily                                             |
-| default-week-immutable    | Hourly (7 days) and daily (7 days)                           |
-
-To protect a resource with immutable backups, apply the following tag:
-
-backup:policy=<policy-name>-immutable
+- AWS Backup Vault Lock is configured on the vault
+- Backups written to the vault cannot be deleted or modified until their retention expires
 
 ## Vault Lock Modes
 
@@ -85,7 +65,8 @@ Deploy with immutable backups in Governance mode:
 cdk deploy -c enableImmutable=true
 ```
 
-Deploy with immutable backups in Compliance mode (adjust vaultLockChangeableForDays as needed):
+Deploy with immutable backups in Compliance mode:   
+This vaultLockChangeableForDays value is expressed in days, it must be a number no less than 3 and no greater than 36,500; otherwise, an error will return:
 
 ```
 cdk deploy -c enableImmutable=true -c vaultLockChangeableForDays=3
@@ -100,10 +81,3 @@ WARNING: After the grace period ends, Compliance mode cannot be disabled and the
 - Only one backup:policy tag value should be set per resource
 - Immutable backups are write-once, read-many (WORM)
 - All backup rules in the immutable vault must comply with the vault lock retention range
-
-## Summary
-
-- Use backup:policy=<policy> for standard backups
-- Use backup:policy=<policy>-immutable for immutable backups
-- Immutable backups always use AWS Backup Vault Lock
-- Compliance mode should only be enabled once retention settings are fully validated
