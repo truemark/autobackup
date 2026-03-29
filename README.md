@@ -1,3 +1,6 @@
+## ⚠️ NOTICE: This project has been moved to the [TrueMark Public Monorepo](https://github.com/truemark/public)
+
+
 # Auto Backup
 
 This AWS CDK project deploys functionality to automatically back up resources based on tags.
